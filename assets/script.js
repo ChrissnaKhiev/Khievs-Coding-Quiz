@@ -38,19 +38,33 @@ var questions = [
 function renderQuestion(){
     
     for (var i = 0; i < questions.length; i++){
-        
-    chosenQuestion = document.querySelector(".questions").textContent = questions[i].question;
 
-    //I got this outcome from this with tweaks https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
+        chosenQuestion = document.querySelector(".questions").textContent = questions[i].question;
 
-    var list = "<button><li>" + questions[i].choices.join("</li></button><button><li>") + "</li></button>";
+        //I got this outcome from this with tweaks https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
 
-    chosenAnswer = document.querySelector(".answers").innerHTML = list; //adds list to the html code
+        var list = "<button><li>" + questions[i].choices.join("</li></button></br><button><li>") + "</li></button>";
+
+        chosenAnswer = document.querySelector(".answers").innerHTML = list; //adds list to the html code
+        document.querySelector(".answers").addEventListener("click", checkAnswer(i, questions[i].answer));
     }
     
 }
 
+function checkAnswer(i, arr){
+    console.log()
+    return function(){
+        var givenAnswer = i,
+            correctAnswer = questions[i].answer;
 
+            if (givenAnswer === correctAnswer){
+                document.querySelector(".check").innerHTML = '"Correct"';
+            }else{
+                document.querySelector(".check").innerHTML = '"Incorrect"';
+            }
+            renderQuestion();
+    }
+}
 
 function start() {
     countdown();

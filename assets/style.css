@@ -1,4 +1,18 @@
 *{
     margin: 0px;
     padding: 0px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.center {
+    display: block;
+    justify-content: center;
+}
+h3 {
+    font-weight: 500;
+}
+button {
+    padding: 5px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 10px;
 }
