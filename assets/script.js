@@ -1,7 +1,8 @@
 var currentQuestion = 0;
+var highscoreList = [];
 var timeRemain = document.querySelector("#count");
 var startQuiz = document.querySelector("#startQuiz");
-var score = "";
+var score = 0;
 var count;
 var gameStarted = false;  //allows for countdown check to stop duplicates
 
@@ -47,25 +48,34 @@ function renderQuestion()
             document.querySelector(".answers").innerHTML = list;
         } else if (currentQuestion = questions.length) { //creates page after quiz with highscore stuff
 
-            document.querySelector('.questions').textContent = 'Highscores';
+            document.querySelector('.questions').textContent = 'All done!';
 
             list = 'Your final score is ' + score + '.' + "</br>";
 
             document.querySelector('.answers').innerHTML = list;
 
-            inputInitials = "Enter initials: " + "<input type='text' name='initials'>" + "<input id='button' type='button' onclick='logInit()' value='Submit'>";
+            inputInitials = "Enter initials: " + "<input id='userInitials' type='text' name='initials'>" + "<input id='button' type='button' onclick='logInit()' value='Submit'>";
 
             document.querySelector('.logInitials').innerHTML = inputInitials;
         } else {  //initializes the Highscore page;
             renderHighscores();
         }
 }
-function renderHighscores() {
-    
+function renderHighscores() { //hide quiz and display highscores;
+
+    document.querySelector('.show').style.display = 'none';
+    document.querySelector('.hide').style.display = 'block';
+
+    for (var i = 0; i < todos.length; i++) {
+        var highscoreList = highscoreList[i];
+    }
 }
 
 function logInit() {
-    document.getElementById("enterIt").submit();
+    var input1 = document.getElementById("userInitials");
+    localStorage.setItem("intials", input1.value);
+    var input2 = score;
+    localStorage.setItem("score", JSON.stringify(input2))
   }
 
 function checkAnswer(answer){
@@ -92,6 +102,7 @@ function start() {
     countdown();  
     renderQuestion();  //initialze the quiz
     document.querySelector(".answers").addEventListener("click", event => checkAnswer(event.target.textContent)); // moved to remove double renderQuestion() aka loops this line to move next question
+    document.querySelector("#button, viewHS").addEventListener("click", renderHighscores())
 }
 
 function countdown(){
@@ -103,10 +114,20 @@ function countdown(){
         }, 1000);
         gameStarted = true;
     } else if (currentQuestion = 5) {
-        clearInterval();
-        var score = count;
+        clearInterval(function() {
+            score = count;
+        });
     }
+    console.log(score);
+    if (count === 0){
+        setTimeout(function(){
+            currentQuestion = 5;
+            score = 0;
+        });
+    }
+    console.log(score);
     return score;  //score not logging globally?
+    
 }
 
 

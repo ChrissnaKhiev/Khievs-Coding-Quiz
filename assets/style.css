@@ -16,3 +16,9 @@ button, #button {
     background-color: blueviolet;
     border-radius: 10px;
 }
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
