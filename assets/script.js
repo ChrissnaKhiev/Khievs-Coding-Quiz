@@ -3,7 +3,6 @@ var highscoreList = [];
 var timer;
 var timeRemain = document.querySelector("#count");
 var startQuiz = document.querySelector("#startQuiz");
-var score = 0;
 var count;
 var scoreList = document.querySelector('#highscore-list');
 var gameStarted = false;  //allows for countdown check to stop duplicates
@@ -61,8 +60,6 @@ function renderQuestion()
             inputInitials = "Enter initials: " + "<input id='userInitials' type='text' name='initials'>" + "<input id='button' type='button' onclick='logInit()' value='Submit'>";
 
             document.querySelector('.logInitials').innerHTML = inputInitials;
-        } else {  //initializes the Highscore page;
-            renderHighscores();
         }
 }
 function renderHighscores() { //hide quiz and display highscores;
@@ -74,23 +71,33 @@ function renderHighscores() { //hide quiz and display highscores;
     startButton.disabled = true;
     startButton.style.display = 'none';
 
-    scoreList.innerHTML = "";
-
-    for (var i = 0; i <= scoreList.length; i++) { //referenced unit 4 activity 26
-        var highscoreList = highscoreList[i];
+    sortHscore().forEach(function (p) { //call to the sort for each list object
         var li = document.createElement('li');
+        li.textContent = p.intials + " " + p.score;
+        scoreList.appendChild(li);
+    });
+}
 
-        li.textContent = highscoreList;
-        li.setAttribute("data-index", i);
-
-        highscoreList.appendChild(li);
+function sortHscore() { //creates the list, sorts list, and returns the ordered list
+    for (var i = 0; i < localStorage.getItem("playerCount"); i++){
+        var playerScore = JSON.parse(localStorage.getItem(i));
+        highscoreList.push(playerScore); //adds to the array
     }
+    return highscoreList.sort(function(a, b) { //this is sorting can comparing the values from higher to lower
+        b.score - a.score; 
+    });
 }
 
 function logInit() {
-    var input1 = document.getElementById("userInitials");
-    localStorage.setItem("intials", input1.value);
-    localStorage.setItem("score", count)
+    var playerId = localStorage.getItem('playerCount');
+    var input1 = document.getElementById("userInitials"); //gets input from user then sets Item into object
+    localStorage.setItem(playerId, JSON.stringify({
+        intials: input1.value,
+        score: count
+    }));
+    playerId++; //counter to add players
+    localStorage.setItem('playerCount', playerId);
+    renderHighscores();
   }
 
 function checkAnswer(answer){
@@ -109,23 +116,37 @@ function checkAnswer(answer){
     renderQuestion(); 
 }
 
+function clearHs() { //function to clear highscore
+    localStorage.clear();
+    highscoreList = []; //clear from array
+    scoreList.innerHTML = ''; // clear from current html
+    renderHighscores(); // rerenders
+}
+
 
 function start() {
     var startButton = document.querySelector('#startQuiz'); //https://flaviocopes.com/how-to-disable-button-javascript/
     startButton.disabled = true;
     startButton.style.display = 'none';  //hides the start quiz button
+    if(localStorage.getItem('playerCount') === null)  //see if there playercount in the local storage exists *already*
+        localStorage.setItem('playerCount', 0);
     countdown();  
     renderQuestion();  //initialze the quiz
     document.querySelector(".answers").addEventListener("click", event => checkAnswer(event.target.textContent)); // moved to remove double renderQuestion() aka loops this line to move next question
-    document.querySelector("#button").addEventListener("click", renderHighscores())
 }
 
 function countdown(){
     if (!gameStarted) {
-        count = 75;
+        count = 30;
         timer = setInterval(function() {
             count--;
             timeRemain.textContent = count;
+            if (count <= 0){// next 2 lines remove the negative timers
+                count = 0;
+                timeRemain.textContent = count;
+                currentQuestion = 5;
+                renderQuestion();
+            }
         }, 1000);
         gameStarted = true;
     }
