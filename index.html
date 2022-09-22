@@ -8,7 +8,7 @@
     <body>
         <header class="show">
             <h1 onclick="renderHighscores()">View Highscores</h1>
-            <h2>Time Remaining: <span id="count">0</span></h2>
+            <h2 id="clock">Time Remaining: <span id="count">0</span></h2>
         </header>
 
         <section>
@@ -18,18 +18,21 @@
                     <h3 class="answers">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!</h3>
                 </ol>
                 <form>
-                    <p class="logInitials"></p>
+                    <h3 class="logInitials"></h3>
                 </form>
-                <p class="check"></p>
+                <div>
+                    <hr>
+                    <p class="check"></p>
+                </div>
             </div>
             <div class="center hide">
-                <h2>Highscores</h2>
+                <h1>Highscores</h1>
                 <ol id="highscore-list">
                 </ol>
-                <button onclick="window.location.reload()">Go Back</button>
-                <button onclick="clearHs()">Clear Highscores</button>
+                <button class='buttonHS' onclick="window.location.reload()">Go Back</button>
+                <button class='buttonHS' onclick="clearHs()">Clear Highscores</button>
             </div>
-            <div>
+            <div class="center">
                 <button id="startQuiz">Start Quiz</button>
             </div>
         </section>

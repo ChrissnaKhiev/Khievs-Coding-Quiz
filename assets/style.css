@@ -4,17 +4,74 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .center {
-    display: block;
-    justify-content: center;
+    text-align: center;
+    width: 100%;
 }
 h1 {
+    display: inline;
     text-decoration: underline;
 }
+#clock {
+    float: right;
+}
 h3 {
+    flex-wrap: wrap;
     font-weight: 500;
 }
-button, #button {
-    padding: 5px;
+.answers {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    margin: auto;
+    width: 90%;
+}
+#highscore-list{
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    margin: auto;
+    width: 90%;
+    font-weight: 600;
+    font-size: 18px;
+}
+hr {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+}
+ol {
+    align-items: center;
+    margin: auto;
+    width: 50%;
+}
+button {
+    display: inline;
+    padding: 8px 10px 8px 25px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 10px;
+}
+#button {
+    display: inline-block;
+    padding: 8px 10px 8px 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 10px;
+}
+
+.buttonHS {
+    padding: 8px 10px 8px 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 10px;
+}
+
+#startQuiz {
+    align-content: center;
+    display: inline;
+    padding: 8px 10px 8px 10px;
     color: white;
     background-color: blueviolet;
     border-radius: 10px;

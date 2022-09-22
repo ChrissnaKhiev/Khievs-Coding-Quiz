@@ -44,7 +44,7 @@ function renderQuestion()
             document.querySelector(".questions").textContent = questions[currentQuestion].question;
 
             //I got this outcome from this with tweaks https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
-            var list = "<button>" + questions[currentQuestion].choices.join("</button></br><button>") + "</button>";
+            var list = "<button><li>" + questions[currentQuestion].choices.join("</li></button></br><button><li>") + "</li></button>";
 
             document.querySelector(".answers").innerHTML = list;
         } else if (currentQuestion = questions.length) { //creates page after quiz with highscore stuff
@@ -110,6 +110,12 @@ function checkAnswer(answer){
             document.querySelector(".check").innerHTML = '"Incorrect"';
             count -= 10;
             timeRemain.textContent = count;  //needs to reinitialize the timeRemain
+            if (count <= 0){// next 2 lines remove the negative timers
+                count = 0;
+                timeRemain.textContent = count;
+                currentQuestion = 5;
+                renderQuestion();
+            }
         }
     //next 2 lines is what changes the quiz question
     currentQuestion++;
@@ -137,16 +143,10 @@ function start() {
 
 function countdown(){
     if (!gameStarted) {
-        count = 30;
+        count = 75;
         timer = setInterval(function() {
             count--;
             timeRemain.textContent = count;
-            if (count <= 0){// next 2 lines remove the negative timers
-                count = 0;
-                timeRemain.textContent = count;
-                currentQuestion = 5;
-                renderQuestion();
-            }
         }, 1000);
         gameStarted = true;
     }
