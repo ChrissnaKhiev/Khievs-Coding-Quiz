@@ -56,9 +56,12 @@ function renderQuestion()
             inputInitials = "Enter initials: " + "<input type='text' name='initials'>" + "<input id='button' type='button' onclick='logInit()' value='Submit'>";
 
             document.querySelector('.logInitials').innerHTML = inputInitials;
-        } else {
+        } else {  //initializes the Highscore page;
             renderHighscores();
         }
+}
+function renderHighscores() {
+    
 }
 
 function logInit() {
