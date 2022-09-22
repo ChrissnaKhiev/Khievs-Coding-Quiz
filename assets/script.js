@@ -67,8 +67,12 @@ function renderQuestion()
 }
 function renderHighscores() { //hide quiz and display highscores;
 
-    document.querySelector('.show').style.display = 'none';
+    document.querySelectorAll('.show').forEach(luna =>luna.style.display = "none");
     document.querySelector('.hide').style.display = 'block';
+
+    var startButton = document.querySelector('#startQuiz'); //https://flaviocopes.com/how-to-disable-button-javascript/
+    startButton.disabled = true;
+    startButton.style.display = 'none';
 
     scoreList.innerHTML = "";
 
