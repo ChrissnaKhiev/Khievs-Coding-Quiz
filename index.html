@@ -7,7 +7,7 @@
     </head>
     <body>
         <header class="show">
-            <h1 id="viewHS">View Highscores</h1>
+            <h1 onclick="renderHighscores()">View Highscores</h1>
             <h2>Time Remaining: <span id="count">0</span></h2>
         </header>
 
@@ -24,8 +24,8 @@
             </div>
             <div class="center hide">
                 <h2>Highscores</h2>
-
-
+                <ol id="highscore-list">
+                </ol>
             </div>
             <div>
                 <button id="startQuiz">Start Quiz</button>

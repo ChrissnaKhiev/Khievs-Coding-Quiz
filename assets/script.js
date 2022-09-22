@@ -4,6 +4,7 @@ var timeRemain = document.querySelector("#count");
 var startQuiz = document.querySelector("#startQuiz");
 var score = 0;
 var count;
+var scoreList = document.querySelector('#highscore-list');
 var gameStarted = false;  //allows for countdown check to stop duplicates
 
 
@@ -66,8 +67,16 @@ function renderHighscores() { //hide quiz and display highscores;
     document.querySelector('.show').style.display = 'none';
     document.querySelector('.hide').style.display = 'block';
 
-    for (var i = 0; i < todos.length; i++) {
+    scoreList.innerHTML = "";
+
+    for (var i = 0; i <= scoreList.length; i++) { //referenced unit 4 activity 26
         var highscoreList = highscoreList[i];
+        var li = document.createElement('li');
+
+        li.textContent = highscoreList;
+        li.setAttribute("data-index", i);
+
+        highscoreList.appendChild(li);
     }
 }
 
@@ -102,7 +111,7 @@ function start() {
     countdown();  
     renderQuestion();  //initialze the quiz
     document.querySelector(".answers").addEventListener("click", event => checkAnswer(event.target.textContent)); // moved to remove double renderQuestion() aka loops this line to move next question
-    document.querySelector("#button, viewHS").addEventListener("click", renderHighscores())
+    document.querySelector("#button").addEventListener("click", renderHighscores())
 }
 
 function countdown(){
