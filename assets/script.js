@@ -1,5 +1,6 @@
 var currentQuestion = 0;
 var highscoreList = [];
+var timer;
 var timeRemain = document.querySelector("#count");
 var startQuiz = document.querySelector("#startQuiz");
 var score = 0;
@@ -49,9 +50,11 @@ function renderQuestion()
             document.querySelector(".answers").innerHTML = list;
         } else if (currentQuestion = questions.length) { //creates page after quiz with highscore stuff
 
+            clearInterval(timer);
+
             document.querySelector('.questions').textContent = 'All done!';
 
-            list = 'Your final score is ' + score + '.' + "</br>";
+            list = 'Your final score is ' + count + '.' + "</br>";
 
             document.querySelector('.answers').innerHTML = list;
 
@@ -83,8 +86,7 @@ function renderHighscores() { //hide quiz and display highscores;
 function logInit() {
     var input1 = document.getElementById("userInitials");
     localStorage.setItem("intials", input1.value);
-    var input2 = score;
-    localStorage.setItem("score", JSON.stringify(input2))
+    localStorage.setItem("score", count)
   }
 
 function checkAnswer(answer){
@@ -117,26 +119,12 @@ function start() {
 function countdown(){
     if (!gameStarted) {
         count = 75;
-        setInterval(function() {
+        timer = setInterval(function() {
             count--;
             timeRemain.textContent = count;
         }, 1000);
         gameStarted = true;
-    } else if (currentQuestion = 5) {
-        clearInterval(function() {
-            score = count;
-        });
     }
-    console.log(score);
-    if (count === 0){
-        setTimeout(function(){
-            currentQuestion = 5;
-            score = 0;
-        });
-    }
-    console.log(score);
-    return score;  //score not logging globally?
-    
 }
 
 
