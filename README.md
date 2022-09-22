@@ -23,7 +23,7 @@ N/A
 
 ## Usage
 
-User will be able to generate a password in which they can use for their profiles for different applications.
+User will be able to take a quiz about coding to determine where they stand in coding.
 
 ## Credits
 
