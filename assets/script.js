@@ -1,7 +1,7 @@
 var currentQuestion = 0;
 var timeRemain = document.querySelector("#count");
 var startQuiz = document.querySelector("#startQuiz");
-var timer;
+var score = "";
 var count;
 var gameStarted = false;  //allows for countdown check to stop duplicates
 
@@ -34,20 +34,36 @@ var questions = [
     }
 ];
 
-function renderQuestion(){
+function renderQuestion()
+{
+    if (currentQuestion < questions.length) //fixed error when at final question 
+        
+        {
+            document.querySelector(".questions").textContent = questions[currentQuestion].question;
 
-    if (currentQuestion < questions.length) //fixed error when at final question
+            //I got this outcome from this with tweaks https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
+            var list = "<button>" + questions[currentQuestion].choices.join("</button></br><button>") + "</button>";
 
-        document.querySelector(".questions").textContent = questions[currentQuestion].question;
+            document.querySelector(".answers").innerHTML = list;
+        } else if (currentQuestion = questions.length) { //creates page after quiz with highscore stuff
 
-        //I got this outcome from this with tweaks https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
-        var list = "<button>" + questions[currentQuestion].choices.join("</button></br><button>") + "</button>";
+            document.querySelector('.questions').textContent = 'Highscores';
 
-        document.querySelector(".answers").innerHTML = list;
+            list = 'Your final score is ' + score + '.' + "</br>";
+
+            document.querySelector('.answers').innerHTML = list;
+
+            inputInitials = "Enter initials: " + "<input type='text' name='initials'>" + "<input id='button' type='button' onclick='logInit()' value='Submit'>";
+
+            document.querySelector('.logInitials').innerHTML = inputInitials;
+        } else {
+            renderHighscores();
+        }
 }
 
-
-    
+function logInit() {
+    document.getElementById("enterIt").submit();
+  }
 
 function checkAnswer(answer){
     var keyAnswer = questions[currentQuestion].answer;
@@ -72,7 +88,7 @@ function start() {
     startButton.style.display = 'none';  //hides the start quiz button
     countdown();  
     renderQuestion();  //initialze the quiz
-    document.querySelector(".answers").addEventListener("click", e => checkAnswer(e.target.textContent)); // moved to remove double renderQuestion() aka loops this line to move next question
+    document.querySelector(".answers").addEventListener("click", event => checkAnswer(event.target.textContent)); // moved to remove double renderQuestion() aka loops this line to move next question
 }
 
 function countdown(){
@@ -83,7 +99,11 @@ function countdown(){
             timeRemain.textContent = count;
         }, 1000);
         gameStarted = true;
-    };
+    } else if (currentQuestion = 5) {
+        clearInterval();
+        var score = count;
+    }
+    return score;  //score not logging globally?
 }
 
 
