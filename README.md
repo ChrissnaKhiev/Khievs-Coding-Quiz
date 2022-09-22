@@ -1,13 +1,20 @@
 # Khievs-Coding-Quiz
+
+This is a quiz about coding.
+
 ## Description
 
-![Website Appearance](/images/website.png)
+![Website Appearance](./assets/images/website.png)
+![Website Appearance2](./assets/images/website2.png)
+![Website Appearance3](./assets/images/website3.png)
+![Website Appearance4](./assets/images/website4.png)
+![Website Appearance5](./assets/images/website5.png)
 
-Khiev's Password Generator: [Link](https://chrissnakhiev.github.io/Khievs-Coding-Quiz/)
+Khiev's Coding Quiz: [Link](https://chrissnakhiev.github.io/Khievs-Coding-Quiz/)
 
-Khievs-Password-Generator github: [Link](https://github.com/ChrissnaKhiev/Khievs-Coding-Quiz)
+Khievs-Coding-Quiz github: [Link](https://github.com/ChrissnaKhiev/Khievs-Coding-Quiz)
 
-This password generator will generate you a password based on the parameters the user inputs like length, lowercase, uppercase, numbers, and symbols.
+This website is a quiz about coding. It will deduct time based on incorrect answers to the quiz. The remaining time will be your final score at the end of the quiz. You can log your score via local storage. With the local storage data you are able to view highscores and compare with yourself or peers.  
 
 
 ## Installation
