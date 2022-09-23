@@ -76,6 +76,7 @@ function renderHighscores() { //hide quiz and display highscores;
         li.textContent = p.intials + " " + p.score;
         scoreList.appendChild(li);
     });
+
 }
 
 function sortHscore() { //creates the list, sorts list, and returns the ordered list
@@ -147,6 +148,19 @@ function countdown(){
         timer = setInterval(function() {
             count--;
             timeRemain.textContent = count;
+            if (count <= 0){
+                clearInterval(timer);
+                count = 0;
+                timeRemain.textContent = count;
+                currentQuestion = 5;
+                renderQuestion();
+                if (currentQuestion < 5){
+                renderQuestion();
+                }else {
+                    currentQuestion = 5;
+                    renderQuestion();
+                }
+            }
         }, 1000);
         gameStarted = true;
     }
