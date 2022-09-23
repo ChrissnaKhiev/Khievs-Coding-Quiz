@@ -76,7 +76,6 @@ function renderHighscores() { //hide quiz and display highscores;
         li.textContent = p.intials + " " + p.score;
         scoreList.appendChild(li);
     });
-
 }
 
 function sortHscore() { //creates the list, sorts list, and returns the ordered list
@@ -84,9 +83,7 @@ function sortHscore() { //creates the list, sorts list, and returns the ordered 
         var playerScore = JSON.parse(localStorage.getItem(i));
         highscoreList.push(playerScore); //adds to the array
     }
-    return highscoreList.sort(function(a, b) { //this is sorting can comparing the values from higher to lower
-        b.score - a.score; 
-    });
+    return highscoreList.sort((a, b) => b.score - a.score); //this is sorting can comparing the values from higher to lower
 }
 
 function logInit() {
